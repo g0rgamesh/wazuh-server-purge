@@ -3,34 +3,40 @@
 set -eu
 
 # Remove dashboard
+echo "Disabling wazuh dashboard service"
+systemctl disable wazuh-dashboard &&
+systemctl daemon-reload &&
 echo "Removing wazuh dashboard"
 yum remove wazuh-dashboard -y &&
 rm -rf /var/lib/wazuh-dashboard/ &&
 rm -rf /usr/share/wazuh-dashboard/ &&
 rm -rf /etc/wazuh-dashboard/ &&
-systemctl disable wazuh-dashboard &&
 echo "Removed wazuh dashboard."
 
 # Remove server
+echo "Disabling wazuh-server service"
+systemctl disable wazuh-manager &&
+systemctl daemon-reload &&
 echo "Removing wazuh server"
 yum remove wazuh-manager -y &&
 rm -rf /var/ossec/ &&
-echo "Disabling wazuh-manager service"
-systemctl disable wazuh-manager &&
-systemctl daemon-reload &&
 echo "Removed wazuh server."
 
 # Remove filebeat
+echo "Disabling filebeat service"
+systemctl disable filebeat.service &&
+systemctl daemon-reload &&
 echo "Removing filebeat"
 yum remove filebeat -y &&
 rm -rf /var/lib/filebeat/ &&
 rm -rf /usr/share/filebeat/ &&
 rm -rf /etc/filebeat/ &&
-systemctl disable filebeat.service &&
-systemctl daemon-reload &&
 echo "Removed filebeat."
 
 # Remove indexer
+echo "Disabling filebeat service"
+systemctl disable wazuh-indexer &&
+systemctl daemon-reload &&
 echo "Removing indexer"
 yum remove wazuh-indexer -y &&
 rm -rf /var/lib/wazuh-indexer/ &&
