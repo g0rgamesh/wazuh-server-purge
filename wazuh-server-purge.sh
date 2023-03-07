@@ -1,5 +1,5 @@
 #/bin/bash
-# This script works with Wazuh with opensearch
+# This script works with Wazuh on opensearch
 # Tested on version 4.3.10
 set -eu
 
