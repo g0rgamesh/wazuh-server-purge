@@ -34,10 +34,10 @@ rm -rf /etc/filebeat/ &&
 echo "Removed filebeat."
 
 # Remove indexer
-echo "Disabling filebeat service"
+echo "Disabling wazuh indexer service"
 systemctl disable wazuh-indexer &&
 systemctl daemon-reload &&
-echo "Removing indexer"
+echo "Removing wazuh indexer"
 yum remove wazuh-indexer -y &&
 rm -rf /var/lib/wazuh-indexer/ &&
 rm -rf /usr/share/wazuh-indexer/ &&
