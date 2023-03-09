@@ -10,6 +10,7 @@ set -eu
 
 # Remove wazuh-manager
 echo -e "\e[36;5;82mDisabling wazuh-manager service...\e[0m"
+systemctl stop wazuh-manager
 systemctl disable wazuh-manager
 systemctl daemon-reload
 echo -e "\e[36;5;82mRemoving wazuh-manager...\e[0m"
@@ -23,7 +24,8 @@ echo -e "\e[38;5;82mRemoved wazuh-manager.\e[0m"
 
 # Remove filebeat
 echo -e "\e[36;5;82mDisabling filebeat service...\e[0m"
-systemctl disable filebeat.service
+systemctl stop filebeat
+systemctl disable filebeat
 systemctl daemon-reload
 echo -e "\e[36;5;82mRemoving filebeat...\e[0m"
 if $(which yum 2>/dev/null >/dev/null); then
@@ -38,6 +40,7 @@ echo -e "\e[38;5;82mRemoved filebeat.\e[0m"
 
 # Remove elasticsearch
 echo -e "\e[36;5;82mDisabling elasticsearch service...\e[0m"
+systemctl stop elasticsearch
 systemctl disable elasticsearch
 systemctl daemon-reload
 echo -e "\e[36;5;82mRemoving elasticsearch...\e[0m"
@@ -50,6 +53,7 @@ echo -e "\e[38;5;82mRemoved elasticsearch.\e[0m"
 
 # Remove kibana
 echo -e "\e[36;5;82mDisabling kibana...\e[0m"
+systemctl stop kibana
 systemctl disable kibana
 systemctl daemon-reload
 echo -e "\e[36;5;82mRemoving wazuh indexer...\e[0m"
