@@ -2,64 +2,66 @@
 # This script works with Wazuh on opensearch
 # Supports RedHat and Debian families
 # Compatible with systemd
-# Tested on version 4.3.10
+# Tested on version 4.2.5
+# TODO:
+#   - add option to save config files    
 set -eu
 
-# Remove dashboard
-echo "Disabling wazuh dashboard service"
-systemctl disable wazuh-dashboard &&
-systemctl daemon-reload &&
-echo "Removing wazuh dashboard"
-if $(which yum 2>/dev/null >/dev/null); then
-    yum remove wazuh-dashboard -y &&
-    rm -rf /var/lib/wazuh-dashboard/ &&
-    rm -rf /usr/share/wazuh-dashboard/ &&
-    rm -rf /etc/wazuh-dashboard/ &&
-else
-    apt-get remove --purge wazuh-dashboard -y &&
-fi
-echo "Removed wazuh dashboard."
-
 # Remove server
-echo "Disabling wazuh-manager service"
+echo -e "\e[36;5;82mDisabling wazuh-manager service...\e[0m"
 systemctl disable wazuh-manager &&
 systemctl daemon-reload &&
-echo "Removing wazuh-manager"
+echo -e "\e[36;5;82mRemoving wazuh-manager...\e[0m"
 if $(which yum 2>/dev/null >/dev/null); then
     yum remove wazuh-manager -y &&
-    rm -rf /var/ossec/ &&
+    rm -fr /var/ossec/ &&
 else
     apt-get remove --purge wazuh-manager -y &&
 fi
-echo "Removed wazuh server."
+echo -e "\e[38;5;82mRemoved wazuh-manager.\e[0m"
 
 # Remove filebeat
-echo "Disabling filebeat service"
+echo -e "\e[36;5;82mDisabling filebeat service...\e[0m"
 systemctl disable filebeat.service &&
 systemctl daemon-reload &&
-echo "Removing filebeat"
+echo -e "\e[36;5;82mRemoving filebeat...\e[0m"
 if $(which yum 2>/dev/null >/dev/null); then
     yum remove filebeat -y &&
-    rm -rf /var/lib/filebeat/ &&
-    rm -rf /usr/share/filebeat/ &&
-    rm -rf /etc/filebeat/ &&
+    rm -fr /var/lib/filebeat/ &&
+    rm -fr /usr/share/filebeat/ &&
+    rm -fr /etc/filebeat/ &&
 else
     apt-get remove --purge filebeat -y &&
 fi
-echo "Removed filebeat."
+echo -e "\e[38;5;82mRemoved filebeat.\e[0m"
 
-# Remove indexer
-echo "Disabling wazuh indexer service"
-systemctl disable wazuh-indexer &&
+# Remove elasticsearch
+echo -e "\e[36;5;82mDisabling elasticsearch service...\e[0m"
+systemctl disable elasticsearch &&
 systemctl daemon-reload &&
-echo "Removing wazuh indexer"
+echo -e "\e[36;5;82mRemoving elasticsearch...\e[0m"
 if $(which yum 2>/dev/null >/dev/null); then
-    yum remove wazuh-indexer -y &&
-    rm -rf /var/lib/wazuh-indexer/ &&
-    rm -rf /usr/share/wazuh-indexer/ &&
-    rm -rf /etc/wazuh-indexer/ &&
+    yum remove opendistroforelasticsearch -y &&
+    rm -fr /var/lib/elasticsearch &&
+    rm -fr /etc/elasticsearch &&
 else
-    apt-get remove --purge wazuh-indexer -y &&
+    apt-get remove --auto-remove opendistroforelasticsearch -y &&
+    rm -fr /var/lib/elasticsearch &&
+    rm -fr /etc/elasticsearch &&
 fi
-echo -e "Removed wazuh indexer.\n"
-echo "All wazuh server components removed successfully.
+echo -e "\e[38;5;82mRemoved elasticsearch.\e[0m"
+
+# Remove kibana
+echo -e "\e[36;5;82mDisabling kibana...\e[0m"
+systemctl disable kibana &&
+systemctl daemon-reload &&
+echo -e "\e[36;5;82mRemoving wazuh indexer...\e[0m"
+if $(which yum 2>/dev/null >/dev/null); then
+    yum remove opendistroforelasticsearch-kibana -y &&
+    rm -fr /var/lib/kibana/ &&
+    rm -fr /etc/kibana/ &&
+else
+    apt-get remove --purge opendistroforelasticsearch-kibana -y &&
+fi
+echo -e "\e[38;5;82mRemoved kibana.\e[0m"
+echo -e "\e[38;5;82mAll wazuh server components removed successfully.\e[0m"
