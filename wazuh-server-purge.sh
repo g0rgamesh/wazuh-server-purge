@@ -46,8 +46,14 @@ systemctl daemon-reload
 echo -e "\e[36;5;82mRemoving elasticsearch...\e[0m"
 if $(which yum 2>/dev/null >/dev/null); then
     yum remove opendistroforelasticsearch -y
+    # /var/lib/elasticsearch/ might be mounted so * just to make it not throw an error
+    rm -fr /var/lib/elasticsearch/*
+    rm -fr /etc/elasticsearch/
 else
     apt-get remove --auto-remove opendistroforelasticsearch -y
+    # /var/lib/elasticsearch/ might be mounted so * just to make it not throw an error
+    rm -fr /var/lib/elasticsearch/*
+    rm -fr /etc/elasticsearch/
 fi
 echo -e "\e[38;5;82mRemoved elasticsearch.\e[0m"
 
