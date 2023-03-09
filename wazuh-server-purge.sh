@@ -8,7 +8,7 @@
 #   - add option to save config files    
 set -eu
 
-# Remove server
+# Remove wazuh-manager
 echo -e "\e[36;5;82mDisabling wazuh-manager service...\e[0m"
 systemctl disable wazuh-manager &&
 systemctl daemon-reload &&
