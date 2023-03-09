@@ -55,6 +55,9 @@ else
     rm -fr /var/lib/elasticsearch/*
     rm -fr /etc/elasticsearch/
 fi
+# Disable var-lib-elasticsearch.mount
+systemctl disable var-lib-elasticsearch.mount
+systemctl daemon-reload
 echo -e "\e[38;5;82mRemoved elasticsearch.\e[0m"
 
 # Remove kibana
