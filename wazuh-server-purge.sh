@@ -1,4 +1,5 @@
 #/bin/bash
+# This script requires root privilages
 # This script works with Wazuh on opensearch
 # Supports RedHat and Debian families
 # Compatible with systemd
@@ -64,4 +65,4 @@ else
     apt-get remove --purge opendistroforelasticsearch-kibana -y &&
 fi
 echo -e "\e[38;5;82mRemoved kibana.\e[0m"
-echo -e "\e[38;5;82mAll wazuh server components removed successfully.\e[0m"
+echo -e "\e[38;5;82mAll wazuh server components removed successfully!\e[0m"
