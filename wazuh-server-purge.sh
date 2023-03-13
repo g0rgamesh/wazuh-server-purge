@@ -9,6 +9,7 @@
 #   - uninstall/cleanup per service
 
 set -eu
+
 echo "Welcome to wazuh-purge script for v4.2"
 echo "Would you like to just uninstall Wazuh server packages (remove packages and stop, disable services) or do a total cleanup (clean up all wazuh component files)?"
 echo "Choose from options below:"
@@ -151,6 +152,6 @@ case $cleanup_type in
     ;;
 
   *)
-    echo -n "Unknown option, please choose uninstall or cleanup."
+    echo -e "Unknown option, please choose \e[38;5;82muninstall\e[0m or \e[38;5;82mcleanup\e[0m."
     ;;
 esac
