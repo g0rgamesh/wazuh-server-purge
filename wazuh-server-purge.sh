@@ -1,6 +1,6 @@
 #/bin/bash
 # This script requires root privilages
-# This script works with Wazuh on opensearch
+# This script works with Wazuh on elasticsearch
 # Supports RedHat and Debian families
 # Compatible with systemd
 # Tested on version 4.2.5
@@ -13,7 +13,7 @@ echo -e "\e[36;5;82mDisabling wazuh-manager service...\e[0m"
 systemctl stop wazuh-manager
 systemctl disable wazuh-manager
 systemctl daemon-reload
-echo -e "\e[36;5;82mRemoving wazuh-manager...\e[0m"
+echo -e "\e[36;5;82mRemoving wazuh-manager and files...\e[0m"
 if $(which yum 2>/dev/null >/dev/null); then
     yum remove wazuh-manager -y
     rm -fr /var/ossec/
@@ -27,7 +27,7 @@ echo -e "\e[36;5;82mDisabling filebeat service...\e[0m"
 systemctl stop filebeat
 systemctl disable filebeat
 systemctl daemon-reload
-echo -e "\e[36;5;82mRemoving filebeat...\e[0m"
+echo -e "\e[36;5;82mRemoving filebeat and files...\e[0m"
 if $(which yum 2>/dev/null >/dev/null); then
     yum remove filebeat -y
     rm -fr /var/lib/filebeat/
@@ -43,7 +43,7 @@ echo -e "\e[36;5;82mDisabling elasticsearch service...\e[0m"
 systemctl stop elasticsearch
 systemctl disable elasticsearch
 systemctl daemon-reload
-echo -e "\e[36;5;82mRemoving elasticsearch...\e[0m"
+echo -e "\e[36;5;82mRemoving elasticsearch and files...\e[0m"
 if $(which yum 2>/dev/null >/dev/null); then
     yum remove opendistroforelasticsearch -y
     # /var/lib/elasticsearch/ might be mounted so * just to make it not throw an error
@@ -65,7 +65,7 @@ echo -e "\e[36;5;82mDisabling kibana...\e[0m"
 systemctl stop kibana
 systemctl disable kibana
 systemctl daemon-reload
-echo -e "\e[36;5;82mRemoving wazuh indexer...\e[0m"
+echo -e "\e[36;5;82mRemoving kibana and files...\e[0m"
 if $(which yum 2>/dev/null >/dev/null); then
     yum remove opendistroforelasticsearch-kibana -y
     rm -fr /var/lib/kibana/
