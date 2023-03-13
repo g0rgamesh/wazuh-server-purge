@@ -21,6 +21,7 @@ case $cleanup_type in
   uninstall)
     # Remove dashboard
     echo -e "\e[36;5;82mDisabling wazuh-dashboard service...\e[0m"
+    systemctl stop wazuh-dashboard
     systemctl disable wazuh-dashboard
     systemctl daemon-reload
     echo -e "\e[36;5;82mRemoving wazuh-dashboard...\e[0m"
@@ -33,6 +34,7 @@ case $cleanup_type in
     
     # Remove server
     echo -e "\e[36;5;82mDisabling wazuh-manager service...\e[0m"
+    systemctl stop wazuh-manager
     systemctl disable wazuh-manager
     systemctl daemon-reload
     echo -e "\e[36;5;82mRemoving wazuh-manager...\e[0m"
@@ -45,6 +47,7 @@ case $cleanup_type in
     
     # Remove filebeat
     echo -e "\e[36;5;82mDisabling filebeat service...\e[0m"
+    systemctl stop filebeat
     systemctl disable filebeat
     systemctl daemon-reload
     echo -e "\e[36;5;82mRemoving filebeat...\e[0m"
@@ -57,6 +60,7 @@ case $cleanup_type in
     
     # Remove indexer
     echo -e "\e[36;5;82mDisabling wazuh-indexer service...\e[0m"
+    systemctl stop wazuh-indexer
     systemctl disable wazuh-indexer
     systemctl daemon-reload
     echo -e "\e[36;5;82mRemoving wazuh-indexer...\e[0m"
@@ -72,6 +76,7 @@ case $cleanup_type in
   cleanup)
     # Remove dashboard
     echo -e "\e[36;5;82mDisabling wazuh-dashboard service...\e[0m"
+    systemctl stop wazuh-dashboard
     systemctl disable wazuh-dashboard
     systemctl daemon-reload
     if $(which yum 2>/dev/null >/dev/null); then
@@ -89,6 +94,7 @@ case $cleanup_type in
     
     # Remove server
     echo -e "\e[36;5;82mDisabling wazuh-manager service...\e[0m"
+    systemctl stop wazuh-manager
     systemctl disable wazuh-manager
     systemctl daemon-reload
     if $(which yum 2>/dev/null >/dev/null); then
@@ -104,6 +110,7 @@ case $cleanup_type in
     
     # Remove filebeat
     echo -e "\e[36;5;82mDisabling filebeat service...\e[0m"
+    systemctl stop filebeat
     systemctl disable filebeat
     systemctl daemon-reload
     if $(which yum 2>/dev/null >/dev/null); then
@@ -121,6 +128,7 @@ case $cleanup_type in
     
     # Remove indexer
     echo -e "\e[36;5;82mDisabling wazuh-indexer service...\e[0m"
+    systemctl stop wazuh-indexer
     systemctl disable wazuh-indexer
     systemctl daemon-reload
     if $(which yum 2>/dev/null >/dev/null); then
