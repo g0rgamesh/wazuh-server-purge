@@ -29,7 +29,7 @@ systemctl daemon-reload
 echo -e "\e[36;5;82mRemoving wazuh-manager and files...\e[0m"
 if $(which yum 2>/dev/null >/dev/null); then
     yum remove wazuh-manager -y
-    rm -rf /var/ossec/
+    rm -rf /var/ossec/*
 else
     apt-get remove --purge wazuh-manager -y
 fi
