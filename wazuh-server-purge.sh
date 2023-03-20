@@ -16,7 +16,7 @@ systemctl daemon-reload
 echo -e "\e[36;5;82mRemoving wazuh-manager and files...\e[0m"
 if $(which yum 2>/dev/null >/dev/null); then
     yum remove wazuh-manager -y
-    rm -fr /var/ossec/
+    rm -fr /var/ossec/*
 else
     apt-get remove --purge wazuh-manager -y
 fi
@@ -30,9 +30,9 @@ systemctl daemon-reload
 echo -e "\e[36;5;82mRemoving filebeat and files...\e[0m"
 if $(which yum 2>/dev/null >/dev/null); then
     yum remove filebeat -y
-    rm -fr /var/lib/filebeat/
-    rm -fr /usr/share/filebeat/
-    rm -fr /etc/filebeat/
+    rm -fr /var/lib/filebeat/*
+    rm -fr /usr/share/filebeat/*
+    rm -fr /etc/filebeat/*
 else
     apt-get remove --purge filebeat -y
 fi
@@ -48,12 +48,12 @@ if $(which yum 2>/dev/null >/dev/null); then
     yum remove opendistroforelasticsearch -y
     # /var/lib/elasticsearch/ might be mounted so * just to make it not throw an error
     rm -fr /var/lib/elasticsearch/*
-    rm -fr /etc/elasticsearch/
+    rm -fr /etc/elasticsearch/*
 else
     apt-get remove --auto-remove opendistroforelasticsearch -y
     # /var/lib/elasticsearch/ might be mounted so * just to make it not throw an error
     rm -fr /var/lib/elasticsearch/*
-    rm -fr /etc/elasticsearch/
+    rm -fr /etc/elasticsearch/*
 fi
 # Disable var-lib-elasticsearch.mount
 systemctl disable var-lib-elasticsearch.mount
@@ -68,8 +68,8 @@ systemctl daemon-reload
 echo -e "\e[36;5;82mRemoving kibana and files...\e[0m"
 if $(which yum 2>/dev/null >/dev/null); then
     yum remove opendistroforelasticsearch-kibana -y
-    rm -fr /var/lib/kibana/
-    rm -fr /etc/kibana/
+    rm -fr /var/lib/kibana/*
+    rm -fr /etc/kibana/*
 else
     apt-get remove --purge opendistroforelasticsearch-kibana -y
 fi
