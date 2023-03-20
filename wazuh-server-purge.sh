@@ -81,9 +81,9 @@ case $cleanup_type in
     echo -e "\e[36;5;82mRemoving wazuh-dashboard and files...\e[0m"
     if $(which yum 2>/dev/null >/dev/null); then
         yum remove wazuh-dashboard -y
-        rm -rf /var/lib/wazuh-dashboard/
-        rm -rf /usr/share/wazuh-dashboard/
-        rm -rf /etc/wazuh-dashboard/
+        rm -rf /var/lib/wazuh-dashboard/*
+        rm -rf /usr/share/wazuh-dashboard/*
+        rm -rf /etc/wazuh-dashboard/*
     else
         apt-get remove --purge wazuh-dashboard -y
     fi
@@ -111,9 +111,9 @@ case $cleanup_type in
     echo -e "\e[36;5;82mRemoving filebeat and files...\e[0m"
     if $(which yum 2>/dev/null >/dev/null); then
         yum remove filebeat -y
-        rm -rf /var/lib/filebeat/
-        rm -rf /usr/share/filebeat/
-        rm -rf /etc/filebeat/
+        rm -rf /var/lib/filebeat/*
+        rm -rf /usr/share/filebeat/*
+        rm -rf /etc/filebeat/*
     else
         apt-get remove --purge filebeat -y
     fi
@@ -127,9 +127,9 @@ case $cleanup_type in
     echo -e "\e[36;5;82mRemoving wazuh-indexer and files...\e[0m"
     if $(which yum 2>/dev/null >/dev/null); then
         yum remove wazuh-indexer -y
-        rm -rf /var/lib/wazuh-indexer/
-        rm -rf /usr/share/wazuh-indexer/
-        rm -rf /etc/wazuh-indexer/
+        rm -rf /var/lib/wazuh-indexer/*
+        rm -rf /usr/share/wazuh-indexer/*
+        rm -rf /etc/wazuh-indexer/*
     else
         apt-get remove --purge wazuh-indexer -y
     fi
